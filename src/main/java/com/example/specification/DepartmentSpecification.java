@@ -3,6 +3,7 @@ package com.example.specification;
 import com.example.entity.Department;
 import com.example.specification.filter.DepartmentSearchCriteria;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.util.CollectionUtils;
 
 import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
@@ -27,7 +28,8 @@ public class DepartmentSpecification {
                 predicates.add(cb.like(root.get("name"), "%" + filter.getName() + "%"));
             }
 
-            return cb.and(predicates.toArray(new Predicate[predicates.size()]));
+            return !CollectionUtils.isEmpty(predicates) ?
+                    cb.and(predicates.stream().toArray(Predicate[]::new)) : cb.conjunction();
         };
     }
 }

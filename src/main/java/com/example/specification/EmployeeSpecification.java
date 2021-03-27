@@ -3,6 +3,7 @@ package com.example.specification;
 import com.example.entity.Employee;
 import com.example.specification.filter.EmployeeSearchCriteria;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.util.CollectionUtils;
 
 import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
@@ -30,7 +31,8 @@ public class EmployeeSpecification {
                 predicates.add(cb.like(root.get("department").get("name"), "%" + filter.getDepartment() + "%"));
             }
 
-            return cb.and(predicates.toArray(new Predicate[predicates.size()]));
+            return !CollectionUtils.isEmpty(predicates) ?
+                    cb.and(predicates.stream().toArray(Predicate[]::new)) : cb.conjunction();
         };
     }
 }
