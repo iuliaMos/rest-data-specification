@@ -1,6 +1,7 @@
 package com.example.mapper;
 
 import com.example.dto.DepartmentDTO;
+import com.example.dto.DepartmentModel;
 import com.example.dto.EmployeeDTO;
 import com.example.entity.Department;
 import com.example.entity.Employee;
@@ -25,12 +26,11 @@ public class EmployeeMapper {
                 employee.getAge());
     }
 
-    public static Department toEntity(final DepartmentDTO departmentDTO) {
+    public static Department toEntity(final DepartmentModel departmentModel) {
         Department department = new Department();
 
-        department.setId(departmentDTO.getId());
-        department.setName(departmentDTO.getName());
-        department.setCountry(departmentDTO.getCountry());
+        department.setName(departmentModel.getName());
+        department.setCountry(departmentModel.getCountry());
 
         return department;
     }

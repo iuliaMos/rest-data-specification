@@ -1,6 +1,7 @@
 package com.example.service;
 
 import com.example.dto.DepartmentDTO;
+import com.example.dto.DepartmentModel;
 import com.example.entity.Department;
 import com.example.mapper.EmployeeMapper;
 import com.example.repository.DepartmentRepository;
@@ -35,4 +36,11 @@ public class DepartmentService {
                 .collect(Collectors.toList());
     }
 
+    public DepartmentDTO getDepartmentById(final Long id) {
+        return repository.findById(id).map(EmployeeMapper::toDTO).orElse(null);
+    }
+
+    public void save(final DepartmentModel department) {
+        repository.save(EmployeeMapper.toEntity(department));
+    }
 }
