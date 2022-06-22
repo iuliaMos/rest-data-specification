@@ -37,3 +37,22 @@ INSERT INTO employee (id, name, department_id, age) VALUES
 (12, 'Cristian Andrei', 7, 42),
 (13, 'Ana Stefanescu', 7, null),
 (14, 'Maria Ionescu', 7, 41);
+
+
+INSERT INTO employee2 (id, name, department_id, age) VALUES
+(1, 'Empl2 Popescu', 7, 44),
+(2, 'Empl2 Andreescu', 18, 55),
+(3, 'Empl2 Stefanescu', 18, 22);
+
+INSERT INTO parent (id, name) VALUES
+     (1, 'Ana Popescu'),
+     (2, 'Emil Andreescu'),
+     (3, 'Andrei Stefanescu');
+
+INSERT INTO child (id, name) VALUES
+  (1, 'Alina'),
+  (2, 'Maria'),
+  (3, 'Ion');
+
+INSERT INTO parent_child(parent_id, child_id)
+VALUES (1,1);

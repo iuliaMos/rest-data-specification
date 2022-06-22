@@ -11,12 +11,11 @@ import javax.persistence.*;
 @Entity
 @SuperBuilder
 @NoArgsConstructor
-public class Employee extends Emp {
-
+public class Employee2 extends Emp {
 
     @Override
     @Id
-    ///@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return super.getId();
     }
@@ -57,5 +56,17 @@ public class Employee extends Emp {
     @Override
     public void setAge(Integer age) {
         super.setAge(age);
+    }
+
+
+    public static class EntityBuilder {
+        public static Employee2 buildViewFromTable(Employee e) {
+            return Employee2.builder()
+                    .id(e.getId())
+                    .name(e.getName())
+                    .department(e.getDepartment())
+                    .age(e.getAge())
+                    .build();
+        }
     }
 }
