@@ -28,3 +28,5 @@ CREATE TABLE IF NOT EXISTS parent_child(
     parent_id INT NOT NULL REFERENCES parent(id),
     child_id INT NOT NULL REFERENCES child(id),
     PRIMARY KEY (parent_id, child_id));
+
+CREATE OR REPLACE VIEW emp3 AS SELECT * FROM employee;

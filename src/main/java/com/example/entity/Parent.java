@@ -12,15 +12,8 @@ import java.util.Optional;
 @Table(name = "parent")
 public class Parent {
 
-    public Parent() {
-    }
-
-    public Parent(Long id) {
-        this.id = id;
-    }
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   // @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
