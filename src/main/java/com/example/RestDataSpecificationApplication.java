@@ -20,12 +20,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.*;
 
 @SpringBootApplication
 public class RestDataSpecificationApplication implements CommandLineRunner {
 
-    @Autowired
+/*    @Autowired
     private HibernateEmployeeDaoImpl hibernateEmployeeDaoImpl;
 
     @Autowired
@@ -44,7 +47,10 @@ public class RestDataSpecificationApplication implements CommandLineRunner {
     private Part1Repository part1Repository;
 
     @Autowired
-    private Part2Repository part2Repository;
+    private Part2Repository part2Repository;*/
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     public static void main(String[] args) {
         SpringApplication.run(RestDataSpecificationApplication.class, args);
@@ -121,7 +127,7 @@ public class RestDataSpecificationApplication implements CommandLineRunner {
     }
 
     private void testPartitioning() {
-        List<Part1> part1List = part1Repository.findAll();
+  /*      List<Part1> part1List = part1Repository.findAll();
         System.out.println(part1List);
 
         List<Part2> part2List = part2Repository.findAll();
@@ -143,5 +149,18 @@ public class RestDataSpecificationApplication implements CommandLineRunner {
         p11.setCreatedon(new Date());
         part1Repository.save(p11);
         System.out.println(part1Repository.findAll());
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        Query q1 = entityManager.createNativeQuery("select * from part1_view", Part1.class);
+        System.out.println(q1.getResultList());
+
+        q1 = entityManager.createNativeQuery("select * from part2_view", Part2.class);
+        System.out.println(q1.getResultList());
+*/
+
+        System.out.println("QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ");
+        Session session = entityManager.unwrap(Session.class);
+        org.hibernate.query.Query<Part2> sql = session.createQuery(
+                "select p from part2_view p", Part2.class);
+        System.out.println(sql.list());
     }
 }

@@ -3,6 +3,13 @@ package com.example.entity.partitioning;
 import javax.persistence.*;
 import java.util.*;
 
+@SqlResultSetMapping(name = "Part2RSMapping",
+        entities = @EntityResult(entityClass = Part2.class,
+                fields = {
+                        @FieldResult(name = "id", column = "id"),
+                        @FieldResult(name = "createdon", column = "createdon"),
+                        @FieldResult(name = "name", column = "name")
+                }))
 @Entity
 @Table(name = "part2")
 @IdClass(Part2PK.class)
@@ -63,6 +70,9 @@ public class Part2 {
         Set<Part1> set = Optional.ofNullable(this.getPart1Set()).orElse(new HashSet<>());
         this.setPart1Set(set);
         set.add(p1);
+        Set<Part2> set2 = Optional.ofNullable(p1.getPart2Set()).orElse(new HashSet<>());
+        set2.add(this);
+        p1.setPart2Set(set2);
     }
 
     @Override
